@@ -6,7 +6,7 @@ services:
     ports:
       - "3000:80"
     depends_on:
-      - mariadb
+      - db
     volumes:
       - ".:/app"
       - "/app/node_modules"
