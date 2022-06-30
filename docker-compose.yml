@@ -1,21 +1,31 @@
-version: '3.3'
+version: '3.9'
 services:
-  db:
-    container_name: demo-graphql-db
-    image: mariadb:10.6
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=graphql
-    ports:
-      - 3306:3306
 
   phpmyadmin:
-    container_name: demo-graphql-phpmyadmin
+    container_name: "demo-graphql-phpmyadmin"
     image: phpmyadmin:5.1
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - PMA_host=db
     ports:
-      - 8081:80
+      - "8081:80"
+    environment:
+      PMA_host: db
+    depends_on:
+      - db
+
+  db:
+    container_name: "demo-graphql-db"
+    build: ./data
+    ports:
+      - "3306:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: "root"
+      MARIADB_DATABASE: "graphql"
+    volumes:
+      - "data:/var/lib/mysql"
+
+
+volumes:
+  data:
+
+
 
 
