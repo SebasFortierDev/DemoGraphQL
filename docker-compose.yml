@@ -1,5 +1,14 @@
 version: '3.9'
 services:
+  api-graphql:
+    container_name: "api-graphql"
+    build: .
+    ports:
+      - "3000:80"
+    depends_on:
+      - mariadb
+    volumes:
+      - "/app/node_modules"
 
   phpmyadmin:
     container_name: "demo-graphql-phpmyadmin"
