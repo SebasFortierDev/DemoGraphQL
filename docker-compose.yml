@@ -8,6 +8,7 @@ services:
     depends_on:
       - mariadb
     volumes:
+      - ".:/app"
       - "/app/node_modules"
 
   phpmyadmin:
@@ -30,7 +31,6 @@ services:
       MARIADB_DATABASE: "graphql"
     volumes:
       - "data:/var/lib/mysql"
-
 
 volumes:
   data:
