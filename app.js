@@ -4,12 +4,15 @@ const helmet = require('helmet');
 const { graphqlHTTP } = require('express-graphql')
 const schema = require('./graphql/schema')
 const root = require('./graphql/resolvers')
-
+const loggingMiddleware = require('./middlewares/loggingMiddleware')
 
 const port = process.env.PORT
 
 const app = express()
+
 app.use(helmet({ contentSecurityPolicy: (process.env.NODE_ENV === 'production') }))
+
+app.use(loggingMiddleware)
 
 app.use('/graphql', graphqlHTTP({
     schema: schema,

@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  db:
+    container_name: demo-graphql-db
+    image: mariadb:10.6
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=graphql
+    ports:
+      - 3306:3306
+
+  phpmyadmin:
+    container_name: demo-graphql-phpmyadmin
+    image: phpmyadmin:5.1
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - PMA_host=db
+    ports:
+      - 8081:80
+
+
